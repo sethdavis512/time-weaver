@@ -34,13 +34,13 @@ export default function AppRoute() {
                     )} */}
                 </ul>
                 <ul className="flex gap-4">
-                    {!userId && (
+                    {/* {!userId && (
                         <li>
                             <NavLink to="/sign-up" className={navLinkClassName}>
                                 Sign up
                             </NavLink>
                         </li>
-                    )}
+                    )} */}
                     {!userId && (
                         <li>
                             <NavLink to="/sign-in" className={navLinkClassName}>

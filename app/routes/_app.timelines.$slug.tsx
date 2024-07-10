@@ -34,18 +34,20 @@ export default function TimelineDetailRoute() {
 
     return (
         <div className="container mx-auto space-y-4 px-4">
-            <Card>
-                <h1 className="mb-4 text-4xl font-bold">{timeline.name}</h1>
-                <ul>
-                    <li>
-                        Starts: <Tag>{format(timeline.start, "M/d/yy p")}</Tag>
-                    </li>
-                    <li>
-                        Ends: <Tag>{format(timeline.end, "M/d/yy p")}</Tag>
-                    </li>
-                </ul>
-            </Card>
-            <Card>
+            <h1 className="mb-4 text-4xl font-bold">{timeline.name}</h1>
+            <ul className="flex gap-2">
+                <li>
+                    Starts:{" "}
+                    <Tag color="green">
+                        {format(timeline.start, "M/d/yy p")}
+                    </Tag>
+                </li>
+                <li>
+                    Ends:{" "}
+                    <Tag color="red">{format(timeline.end, "M/d/yy p")}</Tag>
+                </li>
+            </ul>
+            <Card className="border-none dark:bg-gray-800">
                 <span className="text-sm">Current time:</span>
                 <h3 className="text-3xl font-bold">
                     {now.toLocaleTimeString()}
@@ -61,11 +63,13 @@ export default function TimelineDetailRoute() {
                         >
                             <ul className="flex items-center justify-between">
                                 <li>
-                                    <h3 className="text-2xl">{ev.name}</h3>
-                                </li>
-                                <li>
-                                    Time left:{" "}
-                                    {getFormattedDuration(now, ev.start)}
+                                    <h3 className="mb-2 text-xl font-bold">
+                                        {ev.name}
+                                    </h3>
+                                    ⏰ Time left:{" "}
+                                    <span className="italic">
+                                        {getFormattedDuration(now, ev.start)}
+                                    </span>
                                 </li>
                                 <li>
                                     <details>

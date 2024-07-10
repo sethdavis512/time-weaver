@@ -23,8 +23,8 @@ export default function IndexRoute() {
     const { timelines } = useLoaderData<typeof loader>();
 
     return (
-        <div className="container mx-auto max-w-3xl">
-            <h1 className="mb-4 text-2xl font-bold">Timelines</h1>
+        <div className="container mx-auto">
+            <h1 className="mb-4 text-4xl font-bold">Timelines</h1>
             <div className="space-y-4">
                 {timelines && timelines.length > 0 ? (
                     timelines.map((timeline) => (

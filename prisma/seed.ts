@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { addMinutes } from "date-fns/addMinutes";
 import kebabCase from "lodash/kebabCase";
 import { addDays } from "date-fns/addDays";
+import { addHours } from "date-fns/addHours";
 
 // const pause = (duration: number) =>
 //     new Promise((res) => setTimeout(res, duration));
@@ -185,7 +186,13 @@ async function main() {
                 end: addDays(start, 1),
                 events: {
                     create: raceEvents.slice(0, 20).map((raceEvent, index) => {
-                        const start = addMinutes(new Date(), (index + 1) * 5);
+                        const start =
+                            index > 5
+                                ? addHours(
+                                      addMinutes(new Date(), (index + 1) * 5),
+                                      Math.floor(index / 5)
+                                  )
+                                : addMinutes(new Date(), (index + 1) * 5);
 
                         return {
                             name: raceEvent,

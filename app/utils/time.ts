@@ -21,7 +21,7 @@ export const getFormattedDuration = (
             end,
         }),
         {
-            format: ["days", "minutes", "seconds"],
+            format: ["days", "hours", "minutes", "seconds"],
             zero: true,
         }
     );

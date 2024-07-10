@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
         "build": "remix vite:build",
+        "deploy": "fly deploy",
         "dev": "remix vite:dev",
         "format": "prettier --write .",
         "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",

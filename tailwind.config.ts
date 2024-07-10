@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 import { wedgesTW } from "@lemonsqueezy/wedges";
 
 export default {
@@ -10,5 +11,26 @@ export default {
         extend: {},
     },
     darkMode: "class",
-    plugins: [wedgesTW()],
+    plugins: [
+        wedgesTW({
+            themes: {
+                dark: {
+                    colors: {
+                        primary: {
+                            ...colors.green,
+                            DEFAULT: colors.green["600"],
+                        },
+                    },
+                },
+                light: {
+                    colors: {
+                        primary: {
+                            ...colors.green,
+                            DEFAULT: colors.green["500"],
+                        },
+                    },
+                },
+            },
+        }),
+    ],
 } satisfies Config;

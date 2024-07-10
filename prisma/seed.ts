@@ -184,8 +184,8 @@ async function main() {
                 start,
                 end: addDays(start, 1),
                 events: {
-                    create: raceEvents.map((raceEvent, index) => {
-                        const start = addMinutes(new Date(), (index + 1) * 30);
+                    create: raceEvents.slice(0, 20).map((raceEvent, index) => {
+                        const start = addMinutes(new Date(), (index + 1) * 5);
 
                         return {
                             name: raceEvent,

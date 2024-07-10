@@ -33,7 +33,7 @@ export default function TimelineDetailRoute() {
     }
 
     return (
-        <div className="container mx-auto space-y-4 px-4">
+        <div className="container mx-auto space-y-4">
             <h1 className="mb-4 text-4xl font-bold">{timeline.name}</h1>
             <ul className="flex gap-2">
                 <li>

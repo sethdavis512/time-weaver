@@ -60,7 +60,9 @@ export default function AppRoute() {
                     )}
                 </ul>
             </header>
-            <Outlet />
+            <div className="px-4">
+                <Outlet />
+            </div>
         </>
     );
 }

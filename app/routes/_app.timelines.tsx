@@ -31,7 +31,7 @@ export default function IndexRoute() {
                         {timelines && timelines.length > 0 ? (
                             timelines.map((timeline) => (
                                 <Link
-                                    className="block underline"
+                                    className="block underline dark:text-green-500"
                                     key={timeline.id}
                                     to={`/timelines/${timeline.slug}`}
                                 >

@@ -1,9 +1,10 @@
-import { Tag } from "@lemonsqueezy/wedges";
+import { Button, Tag } from "@lemonsqueezy/wedges";
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { format } from "date-fns/format";
 import { isBefore } from "date-fns/isBefore";
+import { useReducer } from "react";
 import invariant from "tiny-invariant";
 
 import { Card } from "~/components/Card";
@@ -27,10 +28,13 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 export default function TimelineDetailRoute() {
     const { timeline } = useLoaderData<typeof loader>();
     const [now] = useCurrentTime();
+    const [showPast, setShowPast] = useReducer((s) => !s, false);
 
     if (!timeline) {
         return null;
     }
+
+    const pastEvents = timeline.events.filter((ev) => !isBefore(now, ev.start));
 
     return (
         <div className="container mx-auto space-y-4">
@@ -53,10 +57,19 @@ export default function TimelineDetailRoute() {
                     {now.toLocaleTimeString()}
                 </h3>
             </Card>
+            <Button className="w-full" onClick={setShowPast} variant="outline">
+                Click to {showPast ? "hide" : "show"} past events (
+                {pastEvents.length})
+            </Button>
             {timeline.events && timeline.events.length > 0 ? (
-                timeline.events
-                    .filter((ev) => isBefore(now, ev.start))
-                    .map((ev) => (
+                timeline.events.map((ev) => {
+                    const isInFuture = isBefore(now, ev.start);
+
+                    if (!isInFuture && !showPast) {
+                        return null;
+                    }
+
+                    return (
                         <PriorityCard
                             key={ev.id}
                             priority={getPriority(now, ev.start)}
@@ -67,9 +80,16 @@ export default function TimelineDetailRoute() {
                                         {ev.name}
                                     </h3>
                                     ⏰ Time left:{" "}
-                                    <span className="italic">
-                                        {getFormattedDuration(now, ev.start)}
-                                    </span>
+                                    {isInFuture ? (
+                                        <Tag color="yellow" stroke>
+                                            {getFormattedDuration(
+                                                now,
+                                                ev.start
+                                            )}
+                                        </Tag>
+                                    ) : (
+                                        <span className="italic">Expired</span>
+                                    )}
                                 </li>
                                 <li>
                                     <details>
@@ -100,7 +120,8 @@ export default function TimelineDetailRoute() {
                                 </li>
                             </ul>
                         </PriorityCard>
-                    ))
+                    );
+                })
             ) : (
                 <p>No events</p>
             )}

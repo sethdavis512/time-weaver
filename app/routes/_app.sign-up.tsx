@@ -31,9 +31,9 @@ export default function SignUpRoute() {
     });
 
     return (
-        <>
-            <h1 className="text-2xl">Sign up</h1>
-            <Form method="post" {...getFormProps(form)} className="space-y-3">
+        <div className="mx-auto max-w-lg pt-8">
+            <Form method="post" {...getFormProps(form)} className="space-y-4">
+                <h1 className="mb-8 text-4xl font-bold">Sign up</h1>
                 <Input
                     label="Email"
                     helperText={fields.email.errors}
@@ -45,7 +45,9 @@ export default function SignUpRoute() {
                         fields.password.errors ??
                         "Must be between at least 8 characters"
                     }
-                    {...getInputProps(fields.password, { type: "password" })}
+                    {...getInputProps(fields.password, {
+                        type: "password",
+                    })}
                 />
                 <Input
                     label="First name"
@@ -64,10 +66,16 @@ export default function SignUpRoute() {
                     {...getInputProps(fields.lastName, { type: "text" })}
                 />
                 <Button type="submit">Register</Button>
+                <p>
+                    {`Have an account?`}{" "}
+                    <Link
+                        to="/sign-in"
+                        className="underline dark:text-green-500"
+                    >
+                        Sign in here
+                    </Link>
+                </p>
             </Form>
-            <p>
-                {`Have an account?`} <Link to="/sign-in">Sign in here</Link>
-            </p>
-        </>
+        </div>
     );
 }

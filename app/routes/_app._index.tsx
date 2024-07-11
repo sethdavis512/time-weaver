@@ -15,7 +15,7 @@ export default function IndexRoute() {
             <h1 className="mb-4 text-4xl font-bold">Welcome</h1>
             <p className="mb-4">More content coming soon...</p>
             <div className="flex">
-                <Link to="timelines" className="underline">
+                <Link to="timelines" className="underline dark:text-green-500">
                     View Timelines
                 </Link>
             </div>
